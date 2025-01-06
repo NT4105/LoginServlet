@@ -5,6 +5,8 @@
  */
 package controller;
 
+import dao.LoginDAO;
+import entities.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -35,7 +37,13 @@ public class Login extends HttpServlet {
         try {
             String user = request.getParameter("username");
             String pass = request.getParameter("password");
-            
+            LoginDAO loginDAO = new LoginDAO();
+            Account a = loginDAO.checkLogin(user, pass);
+            if (a == null) {
+                response.sendRedirect("login.jsp");
+            } else {
+                response.sendRedirect("success.jsp");
+            }
         } catch (Exception e) {
             
         }
