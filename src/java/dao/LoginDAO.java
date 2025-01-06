@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package dao;
+
 import entities.Account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +19,7 @@ public class LoginDAO {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    
+
     public Account checkLogin(String user, String pass) {
         try {
             String query = "select * from account where username = ? and password = ?";
@@ -28,13 +29,13 @@ public class LoginDAO {
             ps.setString(2, pass);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Account a = new Account (rs.getString(1), rs.getString(2));
+                Account a = new Account(rs.getString(1), rs.getString(2));
                 return a;
             }
         } catch (Exception e) {
-            
+
         }
         return null;
     }
-    
+
 }
