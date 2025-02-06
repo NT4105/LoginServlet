@@ -21,7 +21,7 @@ public class Dbconnection {
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
         Connection conn = null;
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=" + DB_NAME;
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=" + DB_NAME + ";encrypt=false";
 
         // Add debug logging
         System.out.println("Attempting database connection to: " + url);
@@ -31,4 +31,3 @@ public class Dbconnection {
         return conn;
     }
 }
-

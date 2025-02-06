@@ -22,7 +22,7 @@ public class LoginDAO {
 
     public Account checkLogin(String user, String pass) {
         try {
-            String query = "select * from account where username = ? and password = ?";
+            String query = "select * from Account where username = ? and password = ?";
             conn = Dbconnection.getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, user);
@@ -33,7 +33,18 @@ public class LoginDAO {
                 return a;
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (ps != null)
+                    ps.close();
+                if (conn != null)
+                    conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }

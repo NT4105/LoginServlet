@@ -40,12 +40,13 @@ public class Login extends HttpServlet {
             LoginDAO loginDAO = new LoginDAO();
             Account a = loginDAO.checkLogin(user, pass);
             if (a == null) {
-                response.sendRedirect("login.jsp");
+                request.setAttribute("error", "Invalid username or password");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
                 response.sendRedirect("success.jsp");
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
